@@ -8,11 +8,49 @@
 import SwiftUI
 
 struct ReceiptListView: View {
+    
+    @State var viewModel: ViewModel
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Button(action: {
+                viewModel.captureNewReceipt()
+            }) {
+                Image(systemName: "camera")
+            }
+        }
     }
 }
 
+
+extension ReceiptListView {
+    
+    typealias ActionHandler = (ReceiptListView.Action) -> Void
+
+    // MARK: - Action
+    enum Action {
+        case didTapCapture
+    }
+    
+    @Observable
+    final class ViewModel {
+        
+        // MARK: - Action Handler
+        private let onActionSelected: ActionHandler
+        
+        // MARK: - Initializer
+        init(onActionSelected: @escaping ActionHandler = { _ in }) {
+            self.onActionSelected = onActionSelected
+        }
+        
+        func captureNewReceipt() {
+            onActionSelected(.didTapCapture)
+        }
+    }
+}
+
+
+
 #Preview {
-    ReceiptListView()
+    ReceiptListView(viewModel: ReceiptListView.ViewModel())
 }

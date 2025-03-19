@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: windowScene)
-        let view = UIHostingController(rootView: ReceiptListView())
+        let view = UIHostingController(rootView: ReceiptListView(viewModel: ReceiptListView.ViewModel()))
         let navigationController = UINavigationController(rootViewController: view)
         
         
