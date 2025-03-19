@@ -11,21 +11,16 @@ import SwiftUI
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-//    var appCoordinator: AppCoordinator?
+    var appCoordinator: AppCoordinator?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: windowScene)
-        let view = UIHostingController(rootView: ReceiptListView(viewModel: ReceiptListView.ViewModel()))
-        let navigationController = UINavigationController(rootViewController: view)
+        let navigationController = UINavigationController()
         
-        
-        // Initialize the coordinator with the navigation controller and factory
-//        let viewFactory = ViewFactory(networkService: networkService)
-        
-//        appCoordinator = AppCoordinator(navigationController: navigationController, viewFactory: viewFactory)
-//        appCoordinator?.start()
+        appCoordinator = AppCoordinator(navigationController: navigationController)
+        appCoordinator?.start()
         
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
