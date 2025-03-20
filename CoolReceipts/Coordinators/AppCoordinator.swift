@@ -74,13 +74,16 @@ extension AppCoordinator: UIImagePickerControllerDelegate, UINavigationControlle
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true)
         guard let image = info[.originalImage] as? UIImage else { return }
-        
+        receiptListViewModel?.showLoading()
         Task {
+            defer {
+                receiptListViewModel?.hideLoading()
+            }
             do {
                 let _ = try await useCase.execute(image: image)
             } catch {
                 showError(message: error.localizedDescription)
-            } 
+            }
         }
     }
     
