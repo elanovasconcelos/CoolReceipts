@@ -25,17 +25,15 @@ struct LidlReceiptParser: ReceiptParser {
             date = formatter.date(from: dateString)
         }
         
-        // Extract total amount: the bigger value
-        let amountRegex = try? NSRegularExpression(pattern: "(\\d+[\\.,]\\d{2})")
-        let amountMatches = amountRegex?.matches(in: text, range: NSRange(text.startIndex..., in: text))
-        var maxAmount: Double?
-        if let matches = amountMatches {
-            for match in matches {
-                if let range = Range(match.range(at: 1), in: text) {
-                    let amountString = String(text[range]).replacingOccurrences(of: ",", with: ".")
-                    if let amount = Double(amountString) {
-                        maxAmount = max(maxAmount ?? amount, amount)
-                    }
+        var totalAmount: Double? = nil
+        if let dashRange = text.range(of: "------") {
+            let afterDash = text[dashRange.upperBound...]
+            let lines = afterDash.components(separatedBy: "\n")
+            for line in lines {
+                let trimmed = line.trimmingCharacters(in: .whitespacesAndNewlines)
+                if !trimmed.isEmpty, let amount = Double(trimmed.replacingOccurrences(of: ",", with: ".")) {
+                    totalAmount = amount
+                    break
                 }
             }
         }
@@ -43,7 +41,7 @@ struct LidlReceiptParser: ReceiptParser {
         // Determine currency
         let currency = text.contains("EUR") || text.contains("€") ? "€" : "Unknown"
         
-        if let date = date, let totalAmount = maxAmount {
+        if let date = date, let totalAmount = totalAmount {
             return ReceiptData(date: date, totalAmount: totalAmount, currency: currency, storeName: "Lidl")
         }
         return nil
