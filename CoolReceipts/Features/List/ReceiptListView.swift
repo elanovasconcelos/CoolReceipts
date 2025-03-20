@@ -6,17 +6,37 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct ReceiptListView: View {
-    
+
     @State var viewModel: ViewModel
+    // Automatically update the list when Realm data changes
+    @ObservedResults(ReceiptRealmModel.self) var receipts
     
     var body: some View {
-        VStack {
-            Button(action: {
-                viewModel.captureNewReceipt()
-            }) {
-                Image(systemName: "camera")
+        List {
+            if receipts.isEmpty {
+                Text("No receipts found.")
+                    .foregroundColor(.secondary)
+                    .padding()
+            } else {
+                ForEach(receipts) { receipt in
+                    ReceiptRowView(receipt: receipt)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            viewModel.didSelectItem(receipt)
+                        }
+                }
+            }
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                    viewModel.captureNewReceipt()
+                }) {
+                    Image(systemName: "plus")
+                }
             }
         }
     }
@@ -30,6 +50,7 @@ extension ReceiptListView {
     // MARK: - Action
     enum Action {
         case didTapCapture
+        case didSelectItem(ReceiptRealmModel)
     }
     
     @Observable
@@ -45,6 +66,10 @@ extension ReceiptListView {
         
         func captureNewReceipt() {
             onActionSelected(.didTapCapture)
+        }
+        
+        func didSelectItem(_ receipt: ReceiptRealmModel) {
+            onActionSelected(.didSelectItem(receipt))
         }
     }
 }

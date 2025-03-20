@@ -9,4 +9,5 @@ import Foundation
 
 protocol ViewFactoryProtocol {
     func makeReceiptListView(onActionSelected: @escaping ReceiptListView.ActionHandler) -> ReceiptListView
+    func makeReceiptDetailsView(receipt: ReceiptRealmModel) -> ReceiptDetailsView
 }

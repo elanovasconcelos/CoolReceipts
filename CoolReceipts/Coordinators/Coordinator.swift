@@ -19,7 +19,7 @@ extension Coordinator {
     func push(_ view: some View, title: String = "", animated: Bool = true) {
         let controller = host(view, title: title)
         
-        navigationController.pushViewController(controller, animated: false)
+        navigationController.pushViewController(controller, animated: animated)
     }
     
     func present(_ view: some View, title: String = "") {

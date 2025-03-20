@@ -17,4 +17,9 @@ final class ViewFactory: ViewFactoryProtocol {
         let viewModel = ReceiptListView.ViewModel(onActionSelected: onActionSelected)
         return ReceiptListView(viewModel: viewModel)
     }
+    
+    func makeReceiptDetailsView(receipt: ReceiptRealmModel) -> ReceiptDetailsView {
+        let viewModel = ReceiptDetailsView.ViewModel(receipt: receipt)
+        return ReceiptDetailsView(viewModel: viewModel)
+    }
 }
