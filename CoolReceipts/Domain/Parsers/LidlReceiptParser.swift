@@ -25,14 +25,15 @@ struct LidlReceiptParser: ReceiptParser {
             date = formatter.date(from: dateString)
         }
         
+        // Get totalAmount
         var totalAmount: Double? = nil
-        if let dashRange = text.range(of: "------") {
-            let afterDash = text[dashRange.upperBound...]
-            let lines = afterDash.components(separatedBy: "\n")
-            for line in lines {
+        let lines = text.components(separatedBy: "\n")
+        
+        if let ivaIndex = lines.firstIndex(where: { $0.replacingOccurrences(of: " ", with: "").contains("Val.IVA") || $0.contains("ValTotal") }) {
+            for line in lines[..<ivaIndex].reversed() {
                 let trimmed = line.trimmingCharacters(in: .whitespacesAndNewlines)
-                if !trimmed.isEmpty, let amount = Double(trimmed.replacingOccurrences(of: ",", with: ".")) {
-                    totalAmount = amount
+                if let value = Double(trimmed.replacingOccurrences(of: ",", with: ".")) {
+                    totalAmount = value
                     break
                 }
             }
