@@ -52,6 +52,10 @@ struct ProcessReceiptUseCase: ProcessReceiptUseCaseProtocol {
             throw ProcessReceiptError.parsingFailed
         }
         
-        return try repository.saveReceipt(receiptData: receiptData, image: image)
+        do {
+            return try repository.saveReceipt(receiptData: receiptData, image: image)
+        } catch {
+            throw ProcessReceiptError.repositoryError(error)
+        }
     }
 }
