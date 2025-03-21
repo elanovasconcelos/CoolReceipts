@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03331BEF2D8E185100B2460A /* ViewInspector in Frameworks */ = {isa = PBXBuildFile; productRef = 03331BEE2D8E185100B2460A /* ViewInspector */; };
+		03331BF52D8E1A0400B2460A /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 03331BF42D8E1A0400B2460A /* RealmSwift */; };
+		03331BF72D8E1A0400B2460A /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 03331BF42D8E1A0400B2460A /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		0343BEDC2D8B6C6800A22746 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0343BEDB2D8B6C6800A22746 /* RealmSwift */; };
 		037E4D532D8D8F980078ED73 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 0343BEDB2D8B6C6800A22746 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -29,6 +32,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		03331BF62D8E1A0400B2460A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				03331BF72D8E1A0400B2460A /* RealmSwift in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		037E4D522D8D8F740078ED73 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -92,6 +106,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03331BF52D8E1A0400B2460A /* RealmSwift in Frameworks */,
+				03331BEF2D8E185100B2460A /* ViewInspector in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,6 +183,7 @@
 				032DCAB82D8AD3FC00C7D7C8 /* Sources */,
 				032DCAB92D8AD3FC00C7D7C8 /* Frameworks */,
 				032DCABA2D8AD3FC00C7D7C8 /* Resources */,
+				03331BF62D8E1A0400B2460A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -178,6 +195,8 @@
 			);
 			name = CoolReceiptsTests;
 			packageProductDependencies = (
+				03331BEE2D8E185100B2460A /* ViewInspector */,
+				03331BF42D8E1A0400B2460A /* RealmSwift */,
 			);
 			productName = CoolReceiptsTests;
 			productReference = 032DCABC2D8AD3FC00C7D7C8 /* CoolReceiptsTests.xctest */;
@@ -240,6 +259,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				0343BEDA2D8B6C6800A22746 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				03331BED2D8E185100B2460A /* XCRemoteSwiftPackageReference "ViewInspector" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 032DCAA72D8AD3F900C7D7C8 /* Products */;
@@ -604,6 +624,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		03331BED2D8E185100B2460A /* XCRemoteSwiftPackageReference "ViewInspector" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nalexn/ViewInspector";
+			requirement = {
+				kind = exactVersion;
+				version = 0.10.1;
+			};
+		};
 		0343BEDA2D8B6C6800A22746 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift";
@@ -615,6 +643,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		03331BEE2D8E185100B2460A /* ViewInspector */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 03331BED2D8E185100B2460A /* XCRemoteSwiftPackageReference "ViewInspector" */;
+			productName = ViewInspector;
+		};
+		03331BF42D8E1A0400B2460A /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0343BEDA2D8B6C6800A22746 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
 		0343BEDB2D8B6C6800A22746 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0343BEDA2D8B6C6800A22746 /* XCRemoteSwiftPackageReference "realm-swift" */;
